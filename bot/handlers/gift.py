@@ -78,7 +78,7 @@ async def process_gift_code(message: Message, state: FSMContext):
             type="gift",
             duration_months=gift.duration_months,
             users_count=gift.users_count,
-            start_date=datetime.now(timezone.utc),
+            start_date=datetime.now(timezone.utc).replace(tzinfo=None),
             end_date=end_date,
             is_active=True,
         )

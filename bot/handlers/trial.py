@@ -1,6 +1,6 @@
 from aiogram import Router, F
 from aiogram.types import CallbackQuery
-from datetime import datetime, timezone, timedelta
+from datetime import datetime, timedelta, timezone
 from sqlalchemy import select, func
 from bot.database.db import async_session
 from bot.database.models import User as UserModel, Subscription
@@ -79,13 +79,13 @@ async def activate_trial(callback: CallbackQuery):
             await callback.answer()
             return
 
-        end_date = datetime.now(timezone.utc) + timedelta(days=config.TRIAL_DAYS)
+        end_date = datetime.now(timezone.utc).replace(tzinfo=None) + timedelta(days=config.TRIAL_DAYS)
         sub = Subscription(
             user_id=db_user.id,
             type="trial",
             duration_months=0,
             users_count=config.TRIAL_MAX_USERS,
-            start_date=datetime.now(timezone.utc),
+            start_date=datetime.now(timezone.utc).replace(tzinfo=None),
             end_date=end_date,
             is_active=True,
         )

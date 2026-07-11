@@ -18,7 +18,7 @@ def format_date(dt: datetime) -> str:
 
 
 def calc_end_date(months: int) -> datetime:
-    now = datetime.now(timezone.utc)
+    now = datetime.now(timezone.utc).replace(tzinfo=None)
     end = now + timedelta(days=30 * months)
     return end
 

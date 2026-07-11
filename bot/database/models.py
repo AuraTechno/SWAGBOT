@@ -1,5 +1,9 @@
 from datetime import datetime, timezone
 import json
+
+def _utcnow():
+    return datetime.now(timezone.utc).replace(tzinfo=None)
+
 from sqlalchemy import (
     Column, Integer, BigInteger, String, Boolean, DateTime,
     Float, ForeignKey, Text, create_engine
@@ -22,7 +26,7 @@ class User(Base):
     referral_code = Column(String(32), unique=True, nullable=True)
     referred_by_id = Column(BigInteger, nullable=True, index=True)
     is_blocked = Column(Boolean, default=False)
-    created_at = Column(DateTime, default=lambda: datetime.now(timezone.utc))
+    created_at = Column(DateTime, default=_utcnow)
 
     subscriptions = relationship("Subscription", back_populates="user", lazy="selectin")
     payments = relationship("Payment", back_populates="user", lazy="selectin")
@@ -42,7 +46,7 @@ class Subscription(Base):
     auto_renew = Column(Boolean, default=False)
     remnawave_uuid = Column(String(64), nullable=True)
     subscription_url = Column(Text, nullable=True)
-    created_at = Column(DateTime, default=lambda: datetime.now(timezone.utc))
+    created_at = Column(DateTime, default=_utcnow)
 
     user = relationship("User", back_populates="subscriptions")
     payments = relationship("Payment", back_populates="subscription", lazy="selectin")
@@ -59,7 +63,7 @@ class Payment(Base):
     payment_system = Column(String(20), nullable=False)
     status = Column(String(20), default="pending")
     external_id = Column(String(256), nullable=True)
-    created_at = Column(DateTime, default=lambda: datetime.now(timezone.utc))
+    created_at = Column(DateTime, default=_utcnow)
     paid_at = Column(DateTime, nullable=True)
 
     user = relationship("User", back_populates="payments")
@@ -73,8 +77,7 @@ class Referral(Base):
     referrer_id = Column(BigInteger, nullable=False)
     referred_id = Column(BigInteger, nullable=False)
     reward_amount = Column(Float, default=0.0)
-    created_at = Column(DateTime, default=lambda: datetime.now(timezone.utc))
-
+    created_at = Column(DateTime, default=_utcnow)
 
 
 
@@ -89,7 +92,7 @@ class GiftCode(Base):
     used_count = Column(Integer, default=0)
     created_by = Column(BigInteger, nullable=False)
     is_active = Column(Boolean, default=True)
-    created_at = Column(DateTime, default=lambda: datetime.now(timezone.utc))
+    created_at = Column(DateTime, default=_utcnow)
 
 
 class Admin(Base):
@@ -98,4 +101,4 @@ class Admin(Base):
     id = Column(Integer, primary_key=True, autoincrement=True)
     telegram_id = Column(BigInteger, unique=True, nullable=False)
     role = Column(String(20), default="admin")
-    created_at = Column(DateTime, default=lambda: datetime.now(timezone.utc))
+    created_at = Column(DateTime, default=_utcnow)

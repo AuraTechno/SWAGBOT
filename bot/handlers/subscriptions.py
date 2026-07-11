@@ -69,10 +69,11 @@ async def show_subscription_detail(callback: CallbackQuery):
             await callback.answer(_("errors.unknown", lang), show_alert=True)
             return
 
-        now = datetime.now(timezone.utc)
-        if not sub.is_active or sub.end_date <= now:
+        now = datetime.now(timezone.utc).replace(tzinfo=None)
+        end = sub.end_date.replace(tzinfo=None) if sub.end_date.tzinfo else sub.end_date
+        if not sub.is_active or end <= now:
             status = _("subscriptions.status_expired", lang)
-        elif (sub.end_date - now).days <= 7:
+        elif (end - now).days <= 7:
             status = _("subscriptions.status_expiring", lang)
         elif sub.type == "trial":
             status = _("subscriptions.status_trial", lang)

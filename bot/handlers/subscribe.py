@@ -121,7 +121,7 @@ async def process_payment(callback: CallbackQuery):
             type="paid",
             duration_months=months,
             users_count=users_count,
-            start_date=datetime.now(timezone.utc),
+            start_date=datetime.now(timezone.utc).replace(tzinfo=None),
             end_date=end_date,
             is_active=True,
         )

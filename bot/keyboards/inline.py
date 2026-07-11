@@ -88,10 +88,11 @@ def subs_list_keyboard(subs: list, lang: str = "ru") -> InlineKeyboardMarkup:
     builder = InlineKeyboardBuilder()
     for sub in subs:
         from datetime import datetime, timezone
-        now = datetime.now(timezone.utc)
-        if not sub.is_active or sub.end_date <= now:
+        now = datetime.now(timezone.utc).replace(tzinfo=None)
+        end = sub.end_date.replace(tzinfo=None) if sub.end_date.tzinfo else sub.end_date
+        if not sub.is_active or end <= now:
             icon = "🔴"
-        elif (sub.end_date - now).days <= 7:
+        elif (end - now).days <= 7:
             icon = "🟡"
         else:
             icon = "🟢"

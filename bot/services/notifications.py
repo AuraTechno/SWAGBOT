@@ -10,7 +10,7 @@ logger = logging.getLogger(__name__)
 
 
 async def check_expiring_subscriptions(bot):
-    now = datetime.now(timezone.utc)
+    now = datetime.now(timezone.utc).replace(tzinfo=None)
     async with async_session() as session:
         result = await session.execute(
             select(Subscription).where(
