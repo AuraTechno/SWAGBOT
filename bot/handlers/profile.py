@@ -6,6 +6,7 @@ from bot.database.models import User as UserModel, Subscription, Referral
 from bot.keyboards.inline import back_button
 from bot.utils.i18n import _
 from bot.utils.helpers import format_date
+from bot.utils.menu import safe_edit_text
 
 router = Router()
 
@@ -68,7 +69,7 @@ async def show_profile(callback: CallbackQuery):
         text += _("profile.referral_code", lang, code=db_user.referral_code) + "\n"
     text += _("profile.referral_count", lang, count=ref_count)
 
-    await callback.message.edit_text(
+    await safe_edit_text(callback,
         text,
         reply_markup=back_button(lang),
         parse_mode="HTML"

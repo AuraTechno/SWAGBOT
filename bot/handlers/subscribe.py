@@ -14,6 +14,7 @@ from bot.keyboards.inline import (
 )
 from bot.utils.i18n import _
 from bot.utils.helpers import calc_end_date, format_date
+from bot.utils.menu import safe_edit_text
 
 router = Router()
 
@@ -30,7 +31,7 @@ async def show_duration_selection(callback: CallbackQuery):
         db_user = result.scalar_one_or_none()
         lang = db_user.language if db_user else "ru"
 
-    await callback.message.edit_text(
+    await safe_edit_text(callback,
         _("subscribe.select_duration", lang),
         reply_markup=sub_duration_keyboard(lang),
         parse_mode="HTML"
@@ -51,7 +52,7 @@ async def select_sub_duration(callback: CallbackQuery):
 
     _pending_orders[user_id] = {"months": months}
 
-    await callback.message.edit_text(
+    await safe_edit_text(callback,
         _("subscribe.select_users", lang),
         reply_markup=sub_users_keyboard(months, lang),
         parse_mode="HTML"
@@ -87,7 +88,7 @@ async def select_sub_users(callback: CallbackQuery):
     builder.button(text=_("buttons.cancel", lang), callback_data="back_to_menu")
     builder.adjust(1)
 
-    await callback.message.edit_text(
+    await safe_edit_text(callback,
         text,
         reply_markup=builder.as_markup(),
         parse_mode="HTML"
@@ -143,7 +144,7 @@ async def process_payment(callback: CallbackQuery):
         except Exception:
             pass
 
-    await callback.message.edit_text(
+    await safe_edit_text(callback,
         _("subscribe.success", lang, months=months, users_count=users_count, end_date=format_date(end_date)),
         reply_markup=back_button(lang),
         parse_mode="HTML"

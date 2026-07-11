@@ -10,6 +10,7 @@ from bot.config import config
 from bot.keyboards.inline import admin_panel_keyboard, back_button, main_menu
 from bot.utils.i18n import _
 from bot.utils.helpers import generate_gift_code, format_date
+from bot.utils.menu import safe_edit_text
 
 logging = __import__("logging").getLogger(__name__)
 
@@ -44,7 +45,7 @@ async def admin_panel(callback: CallbackQuery):
         db_user = result.scalar_one_or_none()
         lang = db_user.language if db_user else "ru"
 
-    await callback.message.edit_text(
+    await safe_edit_text(callback,
         _("admin.panel", lang),
         reply_markup=admin_panel_keyboard(lang),
         parse_mode="HTML"
@@ -89,7 +90,7 @@ async def admin_stats(callback: CallbackQuery):
              total_payments=total_payments,
              revenue=round(revenue, 2))
 
-    await callback.message.edit_text(
+    await safe_edit_text(callback,
         text,
         reply_markup=admin_panel_keyboard(lang),
         parse_mode="HTML"
@@ -109,7 +110,7 @@ async def admin_create_gift_start(callback: CallbackQuery, state: FSMContext):
         db_user = result.scalar_one_or_none()
         lang = db_user.language if db_user else "ru"
 
-    await callback.message.edit_text(
+    await safe_edit_text(callback,
         "📝 Введи срок подписки в месяцах (1, 3, 6, 12):",
         reply_markup=back_button(lang),
         parse_mode="HTML"
@@ -211,7 +212,7 @@ async def admin_mailing_start(callback: CallbackQuery, state: FSMContext):
         db_user = result.scalar_one_or_none()
         lang = db_user.language if db_user else "ru"
 
-    await callback.message.edit_text(
+    await safe_edit_text(callback,
         "📨 Введи текст рассылки (поддерживается HTML):",
         reply_markup=back_button(lang),
         parse_mode="HTML"
@@ -282,7 +283,7 @@ async def admin_backup(callback: CallbackQuery):
     except Exception as e:
         text = f"❌ Ошибка: {e}"
 
-    await callback.message.edit_text(
+    await safe_edit_text(callback,
         text,
         reply_markup=admin_panel_keyboard(lang),
         parse_mode="HTML"
@@ -307,7 +308,7 @@ async def admin_reset_db_confirm(callback: CallbackQuery):
         [InlineKeyboardButton(text="✅ Да, сбросить", callback_data="admin_reset_do")],
         [InlineKeyboardButton(text="❌ Нет", callback_data="admin_panel")],
     ])
-    await callback.message.edit_text(
+    await safe_edit_text(callback,
         _("admin.reset_confirm", lang),
         reply_markup=kb,
         parse_mode="HTML"
@@ -328,7 +329,7 @@ async def admin_reset_do(callback: CallbackQuery):
         lang = db_user.language if db_user else "ru"
 
     await reset_database()
-    await callback.message.edit_text(
+    await safe_edit_text(callback,
         _("admin.reset_done", lang),
         reply_markup=main_menu(lang, is_admin=True),
         parse_mode="HTML"
@@ -346,7 +347,7 @@ async def show_support(callback: CallbackQuery):
         db_user = result.scalar_one_or_none()
         lang = db_user.language if db_user else "ru"
 
-    await callback.message.edit_text(
+    await safe_edit_text(callback,
         _("support.title", lang) + "\n\n" + _("support.contact", lang),
         reply_markup=back_button(lang),
         parse_mode="HTML"

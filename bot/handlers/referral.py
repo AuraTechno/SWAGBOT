@@ -6,6 +6,7 @@ from bot.database.models import User as UserModel, Referral
 from bot.keyboards.inline import back_button
 from bot.utils.i18n import _
 from bot.config import config
+from bot.utils.menu import safe_edit_text
 
 router = Router()
 
@@ -39,7 +40,7 @@ async def show_referral(callback: CallbackQuery):
     text += _("referral.invited", lang, count=ref_count) + "\n"
     text += _("referral.reward", lang, days=config.REFERRAL_BONUS_DAYS)
 
-    await callback.message.edit_text(
+    await safe_edit_text(callback,
         text,
         reply_markup=back_button(lang),
         parse_mode="HTML",
