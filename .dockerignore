@@ -1,0 +1,13 @@
+.env
+venv/
+data/
+backups/
+__pycache__/
+*.pyc
+*.log
+*.whl
+.git/
+.gitignore
+.DS_Store
+*.ps1
+*.bat
