@@ -19,7 +19,7 @@ docker compose up -d
 
 # Install alias for next time
 if ! grep -q "alias swag=" ~/.bashrc 2>/dev/null; then
-    echo "alias swag='cd ~/SWAGBOT && ./update.sh'" >> ~/.bashrc
+    echo "alias swag='cd ~/SWAGBOT && bash update.sh'" >> ~/.bashrc
     echo "[OK] Alias 'swag' added to ~/.bashrc"
     echo "     Run: source ~/.bashrc"
 fi
