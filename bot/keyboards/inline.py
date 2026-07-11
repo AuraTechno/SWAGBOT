@@ -14,6 +14,7 @@ def language_keyboard() -> InlineKeyboardMarkup:
 def main_menu(lang: str = "ru", is_admin: bool = False) -> InlineKeyboardMarkup:
     builder = InlineKeyboardBuilder()
     builder.button(text=_("buttons.profile", lang), callback_data="profile")
+    builder.button(text=_("buttons.my_subscriptions", lang), callback_data="my_subs")
     builder.button(text=_("buttons.subscribe", lang), callback_data="subscribe")
     builder.button(text=_("buttons.trial", lang), callback_data="trial")
     builder.button(text=_("buttons.referral", lang), callback_data="referral")
@@ -80,6 +81,33 @@ def admin_panel_keyboard(lang: str = "ru") -> InlineKeyboardMarkup:
     builder.button(text=_("admin.reset_db", lang), callback_data="admin_reset_db")
     builder.button(text=_("buttons.back_to_menu", lang), callback_data="back_to_menu")
     builder.adjust(2)
+    return builder.as_markup()
+
+
+def subs_list_keyboard(subs: list, lang: str = "ru") -> InlineKeyboardMarkup:
+    builder = InlineKeyboardBuilder()
+    for sub in subs:
+        from datetime import datetime, timezone
+        now = datetime.now(timezone.utc)
+        if not sub.is_active or sub.end_date <= now:
+            icon = "🔴"
+        elif (sub.end_date - now).days <= 7:
+            icon = "🟡"
+        else:
+            icon = "🟢"
+        label = f"{icon} #{sub.id} — {sub.type} ({sub.duration_months}мес)"
+        builder.button(text=label, callback_data=f"sub_detail_{sub.id}")
+    builder.button(text=_("buttons.back", lang), callback_data="back_to_menu")
+    builder.adjust(1)
+    return builder.as_markup()
+
+
+def sub_detail_keyboard(sub_id: int, sub_url: str | None, lang: str = "ru") -> InlineKeyboardMarkup:
+    builder = InlineKeyboardBuilder()
+    if sub_url:
+        builder.button(text=_("subscriptions.connect", lang), url=sub_url)
+    builder.button(text=_("buttons.back", lang), callback_data="my_subs")
+    builder.adjust(1)
     return builder.as_markup()
 
 

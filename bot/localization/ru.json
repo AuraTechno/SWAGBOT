@@ -73,8 +73,27 @@
     "expiring_soon": "⚠️ <b>Ваша подписка истекает через {days} дн.</b>\n\nДата окончания: {date}\n\nПродлить: /subscribe",
     "expired": "❌ <b>Ваша подписка истекла</b>\n\nДля продолжения использования оплатите новую: /subscribe"
   },
+  "subscriptions": {
+    "title": "📋 <b>Мои подписки</b>",
+    "empty": "У вас нет подписок.",
+    "status_active": "🟢 Активна",
+    "status_expiring": "🟡 Истекает скоро",
+    "status_expired": "🔴 Истекла",
+    "status_trial": "⚪ Пробная",
+    "status_gift": "🎫 Подарочная",
+    "detail_title": "📋 <b>Подписка #{id}</b>",
+    "detail_type": "Тип: {type}",
+    "detail_duration": "Срок: {months} мес.",
+    "detail_users": "Пользователей: {count}",
+    "detail_start": "Начало: {date}",
+    "detail_end": "Окончание: {date}",
+    "detail_status": "Статус: {status}",
+    "connect": "🔗 Подключить",
+    "connect_info": "👆 Нажми кнопку ниже, чтобы открыть страницу подписки и настроить подключение на устройствах."
+  },
   "buttons": {
     "profile": "👤 Профиль",
+    "my_subscriptions": "📋 Мои подписки",
     "subscribe": "📦 Купить подписку",
     "trial": "🎁 Тестовый период",
     "referral": "🔗 Рефералы",

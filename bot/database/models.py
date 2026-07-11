@@ -1,7 +1,8 @@
 from datetime import datetime, timezone
+import json
 from sqlalchemy import (
     Column, Integer, BigInteger, String, Boolean, DateTime,
-    Float, ForeignKey, create_engine
+    Float, ForeignKey, Text, create_engine
 )
 from sqlalchemy.orm import DeclarativeBase, relationship
 from bot.config import config
@@ -39,6 +40,8 @@ class Subscription(Base):
     end_date = Column(DateTime, nullable=False)
     is_active = Column(Boolean, default=True)
     auto_renew = Column(Boolean, default=False)
+    remnawave_uuid = Column(String(64), nullable=True)
+    subscription_url = Column(Text, nullable=True)
     created_at = Column(DateTime, default=lambda: datetime.now(timezone.utc))
 
     user = relationship("User", back_populates="subscriptions")

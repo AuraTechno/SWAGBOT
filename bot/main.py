@@ -11,7 +11,7 @@ from bot.config import config
 from bot.database.db import init_db
 from bot.utils.i18n import load_localizations
 
-from bot.handlers import start, profile, subscribe, trial, referral, gift, admin
+from bot.handlers import start, profile, subscribe, trial, referral, gift, admin, subscriptions
 from bot.middlewares.language import LanguageMiddleware
 
 from bot.services.notifications import check_expiring_subscriptions
@@ -55,6 +55,7 @@ async def main():
     dp.include_router(referral.router)
     dp.include_router(gift.router)
     dp.include_router(admin.router)
+    dp.include_router(subscriptions.router)
 
     asyncio.create_task(scheduler(bot))
 

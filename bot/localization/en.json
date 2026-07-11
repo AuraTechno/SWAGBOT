@@ -73,8 +73,27 @@
     "expiring_soon": "⚠️ <b>Your subscription expires in {days} day(s)</b>\n\nExpiry date: {date}\n\nRenew: /subscribe",
     "expired": "❌ <b>Your subscription has expired</b>\n\nTo continue using, buy a new one: /subscribe"
   },
+  "subscriptions": {
+    "title": "📋 <b>My Subscriptions</b>",
+    "empty": "You have no subscriptions.",
+    "status_active": "🟢 Active",
+    "status_expiring": "🟡 Expiring soon",
+    "status_expired": "🔴 Expired",
+    "status_trial": "⚪ Trial",
+    "status_gift": "🎫 Gift",
+    "detail_title": "📋 <b>Subscription #{id}</b>",
+    "detail_type": "Type: {type}",
+    "detail_duration": "Duration: {months} mo.",
+    "detail_users": "Users: {count}",
+    "detail_start": "Start: {date}",
+    "detail_end": "End: {date}",
+    "detail_status": "Status: {status}",
+    "connect": "🔗 Connect",
+    "connect_info": "👆 Click the button below to open the subscription page and configure connection on your devices."
+  },
   "buttons": {
     "profile": "👤 Profile",
+    "my_subscriptions": "📋 My subscriptions",
     "subscribe": "📦 Buy subscription",
     "trial": "🎁 Trial period",
     "referral": "🔗 Referrals",
