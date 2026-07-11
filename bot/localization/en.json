@@ -1,0 +1,100 @@
+{
+  "start": {
+    "welcome": "👋 Welcome to <b>SWAG VPN</b>!\n\n🌐 Fast, secure and reliable VPN service.\n\nSelect your language:",
+    "main_menu": "🏠 <b>Main Menu</b>\n\nYour ID: <code>{telegram_id}</code>",
+    "select_language": "🌐 Select language:"
+  },
+  "channel": {
+    "must_subscribe": "⚠️ To use the bot, you must subscribe to our channel.\n\n👉 {channel_url}",
+    "subscribed": "✅ Thank you for subscribing!",
+    "check": "✅ Check subscription",
+    "not_subscribed": "❌ You are not subscribed to the channel. Please subscribe."
+  },
+  "profile": {
+    "title": "👤 <b>Your Profile</b>",
+    "id": "ID: <code>{telegram_id}</code>",
+    "username": "Username: @{username}",
+    "subscription": "📅 Subscription: {status}",
+    "active": "✅ Active until {date}",
+    "no_active": "❌ No active subscription",
+    "users_count": "👥 Users: {count}",
+    "referral_code": "🔗 Referral link: <code>{code}</code>",
+    "referral_count": "👥 Referrals: {count}",
+    "trial_used": "Trial used: {used}"
+  },
+  "subscribe": {
+    "title": "📦 <b>Buy Subscription</b>\n\nSelect duration:",
+    "select_duration": "⏱ Select subscription duration:",
+    "select_users": "👥 Select number of users (1-4):",
+    "users_count": "{count} user(s)",
+    "confirm": "✅ <b>Order Confirmation</b>\n\nDuration: {months} mo.\nUsers: {users_count}\nTotal: <b>${price}</b>\n\nContinue?",
+    "select_payment": "💳 Select payment method:",
+    "payment_crypto": "₿ CryptoBot (USDT)",
+    "payment_card": "💳 Card (Stripe)",
+    "success": "✅ <b>Subscription successfully paid!</b>\n\nDuration: {months} mo.\nUsers: {users_count}\nActive until: {end_date}",
+    "cancelled": "❌ Cancelled.",
+    "pay": "💰 Pay ${amount}",
+    "cancel": "❌ Cancel"
+  },
+  "trial": {
+    "title": "🎁 <b>Trial Period</b>\n\nGet 3 days of free access to SWAG VPN!",
+    "activate": "🚀 Activate trial",
+    "success": "✅ Trial period activated!\n\nValid until: {end_date}",
+    "already_used": "⚠️ You have already used the trial period.",
+    "has_subscription": "⚠️ You already have an active subscription."
+  },
+  "referral": {
+    "title": "🔗 <b>Referral Program</b>",
+    "your_link": "Your referral link:\n<code>{link}</code>",
+    "invited": "Invited users: {count}",
+    "reward": "For each friend's purchase you get {days} days of subscription!",
+    "no_one": "No one has used your link yet.",
+    "bonus_received": "🎉 You received {days} days of subscription for a referral!"
+  },
+  "gift": {
+    "title": "🎫 <b>Activate Gift Code</b>",
+    "enter_code": "Enter the code:",
+    "success": "✅ Gift code activated!\n\nDuration: {months} mo.\nUsers: {users_count}",
+    "invalid": "❌ Invalid or already used code.",
+    "expired": "❌ This code has expired."
+  },
+  "admin": {
+    "panel": "⚙️ <b>Admin Panel</b>",
+    "stats": "📊 <b>Statistics</b>\n\nTotal users: {total_users}\nActive subscriptions: {active_subs}\nTotal payments: {total_payments}\nRevenue: ${revenue}",
+    "create_gift": "🎫 Create Gift Code",
+    "mailing": "📨 Mailing",
+    "backup": "💾 Backup DB",
+    "reset_db": "🗑 Reset DB",
+    "reset_confirm": "⚠️ Really reset the database? All data will be lost!",
+    "reset_done": "✅ Database has been reset.",
+    "gift_created": "✅ Gift code created:\n\nCode: <code>{code}</code>\nDuration: {months} mo.\nLimit: {users} users\nMax uses: {max_uses}"
+  },
+  "notifications": {
+    "expiring_soon": "⚠️ <b>Your subscription expires in {days} day(s)</b>\n\nExpiry date: {date}\n\nRenew: /subscribe",
+    "expired": "❌ <b>Your subscription has expired</b>\n\nTo continue using, buy a new one: /subscribe"
+  },
+  "buttons": {
+    "profile": "👤 Profile",
+    "subscribe": "📦 Buy subscription",
+    "trial": "🎁 Trial period",
+    "referral": "🔗 Referrals",
+    "gift": "🎫 Gift code",
+    "support": "💬 Support",
+    "back": "🔙 Back",
+    "back_to_menu": "🔙 To menu",
+    "admin_panel": "⚙️ Admin panel",
+    "confirm": "✅ Confirm",
+    "cancel": "❌ Cancel",
+    "yes": "✅ Yes",
+    "no": "❌ No"
+  },
+  "errors": {
+    "unknown": "❌ An error occurred. Please try again later.",
+    "not_admin": "❌ You are not authorized as an admin.",
+    "payment_failed": "❌ Payment failed. Please try again."
+  },
+  "support": {
+    "title": "💬 <b>Support</b>",
+    "contact": "For questions, contact the administrator: @admin_username"
+  }
+}

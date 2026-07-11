@@ -1,0 +1,27 @@
+# Environment
+.env
+
+# Virtual environment
+venv/
+
+# Database
+data/
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+
+# Logs
+*.log
+
+# Downloaded wheels
+*.whl
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db

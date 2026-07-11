@@ -1,0 +1,100 @@
+{
+  "start": {
+    "welcome": "👋 Добро пожаловать в <b>SWAG VPN</b>!\n\n🌐 Быстрый, безопасный и надёжный VPN-сервис.\n\nВыберите язык:",
+    "main_menu": "🏠 <b>Главное меню</b>\n\nВаш ID: <code>{telegram_id}</code>",
+    "select_language": "🌐 Выберите язык:"
+  },
+  "channel": {
+    "must_subscribe": "⚠️ Для использования бота необходимо подписаться на наш канал.\n\n👉 {channel_url}",
+    "subscribed": "✅ Спасибо за подписку!",
+    "check": "✅ Проверить подписку",
+    "not_subscribed": "❌ Вы не подписаны на канал. Пожалуйста, подпишитесь."
+  },
+  "profile": {
+    "title": "👤 <b>Ваш профиль</b>",
+    "id": "ID: <code>{telegram_id}</code>",
+    "username": "Username: @{username}",
+    "subscription": "📅 Подписка: {status}",
+    "active": "✅ Активна до {date}",
+    "no_active": "❌ Нет активной подписки",
+    "users_count": "👥 Пользователей: {count}",
+    "referral_code": "🔗 Реферальный код: <code>{code}</code>",
+    "referral_count": "👥 Приглашено: {count}",
+    "trial_used": "Пробный период: {used}"
+  },
+  "subscribe": {
+    "title": "📦 <b>Купить подписку</b>\n\nВыберите срок:",
+    "select_duration": "⏱ Выберите срок подписки:",
+    "select_users": "👥 Выберите количество пользователей (1-4):",
+    "users_count": "{count} пользователь(я)",
+    "confirm": "✅ <b>Подтверждение заказа</b>\n\nСрок: {months} мес.\nПользователей: {users_count}\nСумма: <b>{price}₽</b>\n\nПродолжить?",
+    "select_payment": "💳 Выберите способ оплаты:",
+    "payment_crypto": "₿ CryptoBot (USDT)",
+    "payment_card": "💳 Картой (Stripe)",
+    "success": "✅ <b>Подписка успешно оплачена!</b>\n\nСрок: {months} мес.\nПользователей: {users_count}\nАктивна до: {end_date}",
+    "cancelled": "❌ Отменено.",
+    "pay": "💰 Оплатить {amount}₽",
+    "cancel": "❌ Отмена"
+  },
+  "trial": {
+    "title": "🎁 <b>Тестовый период</b>\n\nПолучите 3 дня бесплатного доступа к SWAG VPN!",
+    "activate": "🚀 Активировать пробный период",
+    "success": "✅ Пробный период активирован!\n\nДействителен до: {end_date}",
+    "already_used": "⚠️ Вы уже использовали пробный период.",
+    "has_subscription": "⚠️ У вас уже есть активная подписка."
+  },
+  "referral": {
+    "title": "🔗 <b>Реферальная программа</b>",
+    "your_link": "Ваша реферальная ссылка:\n<code>{link}</code>",
+    "invited": "Приглашено пользователей: {count}",
+    "reward": "За каждую покупку друга вы получаете {days} дней подписки!",
+    "no_one": "Пока никто не перешёл по вашей ссылке.",
+    "bonus_received": "🎉 Вам начислено {days} дней подписки за реферала!"
+  },
+  "gift": {
+    "title": "🎫 <b>Активация Gift-кода</b>",
+    "enter_code": "Введите код:",
+    "success": "✅ Gift-код активирован!\n\nСрок: {months} мес.\nПользователей: {users_count}",
+    "invalid": "❌ Неверный или использованный код.",
+    "expired": "❌ Срок действия кода истёк."
+  },
+  "admin": {
+    "panel": "⚙️ <b>Админ-панель</b>",
+    "stats": "📊 <b>Статистика</b>\n\nВсего пользователей: {total_users}\nАктивных подписок: {active_subs}\nВсего оплат: {total_payments}\nДоход: {revenue}₽",
+    "create_gift": "🎫 Создать Gift-код",
+    "mailing": "📨 Рассылка",
+    "backup": "💾 Backup БД",
+    "reset_db": "🗑 Сбросить БД",
+    "reset_confirm": "⚠️ Точно сбросить БД? Все данные будут удалены!",
+    "reset_done": "✅ База данных сброшена.",
+    "gift_created": "✅ Gift-код создан:\n\nКод: <code>{code}</code>\nСрок: {months} мес.\nЛимит: {users} польз.\nИспользований: {max_uses}"
+  },
+  "notifications": {
+    "expiring_soon": "⚠️ <b>Ваша подписка истекает через {days} дн.</b>\n\nДата окончания: {date}\n\nПродлить: /subscribe",
+    "expired": "❌ <b>Ваша подписка истекла</b>\n\nДля продолжения использования оплатите новую: /subscribe"
+  },
+  "buttons": {
+    "profile": "👤 Профиль",
+    "subscribe": "📦 Купить подписку",
+    "trial": "🎁 Тестовый период",
+    "referral": "🔗 Рефералы",
+    "gift": "🎫 Gift-код",
+    "support": "💬 Поддержка",
+    "back": "🔙 Назад",
+    "back_to_menu": "🔙 В меню",
+    "admin_panel": "⚙️ Админ-панель",
+    "confirm": "✅ Подтвердить",
+    "cancel": "❌ Отмена",
+    "yes": "✅ Да",
+    "no": "❌ Нет"
+  },
+  "errors": {
+    "unknown": "❌ Произошла ошибка. Попробуйте позже.",
+    "not_admin": "❌ У вас нет прав администратора.",
+    "payment_failed": "❌ Платёж не прошёл. Попробуйте снова."
+  },
+  "support": {
+    "title": "💬 <b>Поддержка</b>",
+    "contact": "По вопросам обращайтесь к администратору: @admin_username"
+  }
+}
