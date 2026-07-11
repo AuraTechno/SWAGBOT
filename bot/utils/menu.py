@@ -30,10 +30,11 @@ async def safe_edit(
     target: CallbackQuery,
     text: str,
     reply_markup: InlineKeyboardMarkup | None = None,
-    parse_mode: str = "HTML"
+    parse_mode: str = "HTML",
+    **kwargs,
 ):
     msg = target.message
     if msg.caption is not None:
-        await msg.edit_caption(caption=text, reply_markup=reply_markup, parse_mode=parse_mode)
+        await msg.edit_caption(caption=text, reply_markup=reply_markup, parse_mode=parse_mode, **kwargs)
     else:
-        await msg.edit_text(text, reply_markup=reply_markup, parse_mode=parse_mode)
+        await msg.edit_text(text, reply_markup=reply_markup, parse_mode=parse_mode, **kwargs)
