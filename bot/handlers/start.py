@@ -8,7 +8,7 @@ from bot.database.models import User as UserModel, Admin as AdminModel
 from bot.keyboards.inline import language_keyboard, main_menu
 from bot.utils.i18n import _
 from bot.utils.helpers import generate_referral_code
-from bot.utils.menu import send_menu
+from bot.utils.menu import send_menu, safe_edit
 
 router = Router()
 
