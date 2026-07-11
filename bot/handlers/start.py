@@ -8,6 +8,7 @@ from bot.database.models import User as UserModel, Admin as AdminModel
 from bot.keyboards.inline import language_keyboard, main_menu
 from bot.utils.i18n import _
 from bot.utils.helpers import generate_referral_code
+from bot.utils.menu import edit_or_send_menu
 
 router = Router()
 
@@ -67,45 +68,39 @@ async def set_language(callback: CallbackQuery):
             db_user.language = lang
             await session.commit()
 
-    await callback.message.delete()
-
-    is_admin = False
-    async with async_session() as session:
-        result = await session.execute(
+        admin = await session.execute(
             select(AdminModel).where(AdminModel.telegram_id == user_id)
         )
-        is_admin = result.scalar_one_or_none() is not None
+        is_admin = admin.scalar_one_or_none() is not None
 
-    await callback.message.answer(
+    await edit_or_send_menu(
+        callback,
         _("start.main_menu", lang, telegram_id=user_id),
-        reply_markup=main_menu(lang, is_admin),
-        parse_mode="HTML"
+        main_menu(lang, is_admin),
     )
     await callback.answer()
 
 
 @router.callback_query(F.data == "back_to_menu")
 async def back_to_menu(callback: CallbackQuery):
-    lang = callback.data if hasattr(callback, "lang") else "ru"
     user_id = callback.from_user.id
 
-    is_admin = False
     async with async_session() as session:
         result = await session.execute(
+            select(UserModel).where(UserModel.telegram_id == user_id)
+        )
+        db_user = result.scalar_one_or_none()
+        lang = db_user.language if db_user else "ru"
+
+        admin = await session.execute(
             select(AdminModel).where(AdminModel.telegram_id == user_id)
         )
-        is_admin = result.scalar_one_or_none() is not None
+        is_admin = admin.scalar_one_or_none() is not None
 
-    try:
-        await callback.message.delete()
-    except Exception:
-        pass
-
-    text = _("start.main_menu", lang, telegram_id=user_id)
-    await callback.message.answer(
-        text,
-        reply_markup=main_menu(lang, is_admin),
-        parse_mode="HTML"
+    await edit_or_send_menu(
+        callback,
+        _("start.main_menu", lang, telegram_id=user_id),
+        main_menu(lang, is_admin),
     )
     await callback.answer()
 
@@ -126,8 +121,9 @@ async def cmd_menu(message: Message):
         )
         is_admin = admin_result.scalar_one_or_none() is not None
 
-    await message.answer(
+    from bot.utils.menu import send_menu
+    await send_menu(
+        message,
         _("start.main_menu", lang, telegram_id=user.id),
-        reply_markup=main_menu(lang, is_admin),
-        parse_mode="HTML"
+        main_menu(lang, is_admin),
     )

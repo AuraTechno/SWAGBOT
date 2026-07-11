@@ -30,7 +30,7 @@ async def show_profile(callback: CallbackQuery):
                 Subscription.is_active == True
             ).order_by(Subscription.end_date.desc())
         )
-        sub = active_sub.scalar_one_or_none()
+        sub = active_sub.scalars().first()
 
         ref_count_result = await session.execute(
             select(func.count()).select_from(Referral).where(

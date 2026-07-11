@@ -17,6 +17,13 @@ docker compose down
 echo "[4/4] Starting new container..."
 docker compose up -d
 
+# Install alias for next time
+if ! grep -q "alias swag=" ~/.bashrc 2>/dev/null; then
+    echo "alias swag='cd ~/SWAGBOT && ./update.sh'" >> ~/.bashrc
+    echo "[OK] Alias 'swag' added to ~/.bashrc"
+    echo "     Run: source ~/.bashrc"
+fi
+
 echo ""
 echo "=== Update complete! ==="
 docker compose logs --tail=20
