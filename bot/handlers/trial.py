@@ -8,7 +8,7 @@ from bot.config import config
 from bot.keyboards.inline import trial_keyboard, back_button
 from bot.utils.i18n import _
 from bot.utils.helpers import format_date, calc_end_date
-from bot.utils.menu import safe_edit_text
+from bot.utils.menu import safe_edit
 
 router = Router()
 
@@ -26,7 +26,7 @@ async def show_trial(callback: CallbackQuery):
             return
         lang = db_user.language
 
-    await safe_edit_text(callback,
+    await safe_edit(callback,
         _("trial.title", lang),
         reply_markup=trial_keyboard(lang),
         parse_mode="HTML"
@@ -56,7 +56,7 @@ async def activate_trial(callback: CallbackQuery):
         trial_count = trial_result.scalar() or 0
 
         if trial_count > 0:
-            await safe_edit_text(callback,
+            await safe_edit(callback,
                 _("trial.already_used", lang),
                 reply_markup=back_button(lang),
                 parse_mode="HTML"
@@ -71,7 +71,7 @@ async def activate_trial(callback: CallbackQuery):
             ).limit(1)
         )
         if active_sub.scalar_one_or_none():
-            await safe_edit_text(callback,
+            await safe_edit(callback,
                 _("trial.has_subscription", lang),
                 reply_markup=back_button(lang),
                 parse_mode="HTML"
@@ -92,7 +92,7 @@ async def activate_trial(callback: CallbackQuery):
         session.add(sub)
         await session.commit()
 
-    await safe_edit_text(callback,
+    await safe_edit(callback,
         _("trial.success", lang, end_date=format_date(end_date)),
         reply_markup=back_button(lang),
         parse_mode="HTML"

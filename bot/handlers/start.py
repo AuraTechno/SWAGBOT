@@ -8,7 +8,7 @@ from bot.database.models import User as UserModel, Admin as AdminModel
 from bot.keyboards.inline import language_keyboard, main_menu
 from bot.utils.i18n import _
 from bot.utils.helpers import generate_referral_code
-from bot.utils.menu import edit_or_send_menu
+from bot.utils.menu import send_menu
 
 router = Router()
 
@@ -73,7 +73,7 @@ async def set_language(callback: CallbackQuery):
         )
         is_admin = admin.scalar_one_or_none() is not None
 
-    await edit_or_send_menu(
+    await send_menu(
         callback,
         _("start.main_menu", lang, telegram_id=user_id),
         main_menu(lang, is_admin),
@@ -97,7 +97,7 @@ async def back_to_menu(callback: CallbackQuery):
         )
         is_admin = admin.scalar_one_or_none() is not None
 
-    await edit_or_send_menu(
+    await send_menu(
         callback,
         _("start.main_menu", lang, telegram_id=user_id),
         main_menu(lang, is_admin),

@@ -9,7 +9,7 @@ from bot.database.models import User as UserModel, GiftCode, Subscription
 from bot.keyboards.inline import back_button
 from bot.utils.i18n import _
 from bot.utils.helpers import calc_end_date, format_date
-from bot.utils.menu import safe_edit_text
+from bot.utils.menu import safe_edit
 
 router = Router()
 
@@ -28,7 +28,7 @@ async def start_gift(callback: CallbackQuery, state: FSMContext):
         db_user = result.scalar_one_or_none()
         lang = db_user.language if db_user else "ru"
 
-    await safe_edit_text(callback,
+    await safe_edit(callback,
         _("gift.enter_code", lang),
         reply_markup=back_button(lang),
         parse_mode="HTML"
