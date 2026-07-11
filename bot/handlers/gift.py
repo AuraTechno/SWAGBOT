@@ -6,6 +6,7 @@ from datetime import datetime, timezone
 from sqlalchemy import select
 from bot.database.db import async_session
 from bot.database.models import User as UserModel, GiftCode, Subscription
+from bot.config import config
 from bot.keyboards.inline import back_button
 from bot.utils.i18n import _
 from bot.utils.helpers import calc_end_date, format_date
@@ -83,6 +84,20 @@ async def process_gift_code(message: Message, state: FSMContext):
             is_active=True,
         )
         session.add(sub)
+        await session.flush()
+        await session.refresh(sub)
+
+        if config.REMNAWAVE_TOKEN:
+            from bot.services.remnawave import create_user
+            username = f"user_{db_user.telegram_id}_gift_{sub.id}"
+            remna_result = await create_user(
+                username=username,
+                expire_days=30 * gift.duration_months,
+                email=f"{db_user.telegram_id}@swagvpn.com",
+            )
+            if remna_result:
+                sub.remnawave_uuid = remna_result.get("uuid")
+                sub.subscription_url = remna_result.get("subscriptionUrl")
 
         gift.used_count += 1
         if gift.used_count >= gift.max_uses:

@@ -129,6 +129,19 @@ async def process_payment(callback: CallbackQuery):
         await session.commit()
         await session.refresh(sub)
 
+        if config.REMNAWAVE_TOKEN:
+            from bot.services.remnawave import create_user
+            username = f"user_{db_user.telegram_id}_sub_{sub.id}"
+            remna_result = await create_user(
+                username=username,
+                expire_days=30 * months,
+                email=f"{db_user.telegram_id}@swagvpn.com",
+            )
+            if remna_result:
+                sub.remnawave_uuid = remna_result.get("uuid")
+                sub.subscription_url = remna_result.get("subscriptionUrl")
+                await session.commit()
+
         try:
             admin_ids = config.ADMIN_IDS
             for admin_id in admin_ids:
