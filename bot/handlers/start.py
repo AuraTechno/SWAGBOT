@@ -8,7 +8,7 @@ from bot.database.models import User as UserModel, Admin as AdminModel
 from bot.keyboards.inline import language_keyboard, main_menu
 from bot.utils.i18n import _
 from bot.utils.helpers import generate_referral_code
-from bot.utils.menu import send_menu, safe_edit
+from bot.utils.menu import send_menu, safe_edit, has_menu_image
 
 router = Router()
 
@@ -47,11 +47,23 @@ async def cmd_start(message: Message):
                     db_user.referred_by_id = referrer.telegram_id
                     await session.commit()
 
-    await message.answer(
-        _("start.welcome", db_user.language),
-        reply_markup=language_keyboard(),
-        parse_mode="HTML"
-    )
+    welcome_text = _("start.welcome", db_user.language)
+    if has_menu_image():
+        from aiogram.types import FSInputFile
+        from pathlib import Path
+        img = Path(__file__).resolve().parent.parent.parent / "assets" / "menu.jpg"
+        await message.answer_photo(
+            photo=FSInputFile(str(img)),
+            caption=welcome_text,
+            reply_markup=language_keyboard(),
+            parse_mode="HTML",
+        )
+    else:
+        await message.answer(
+            welcome_text,
+            reply_markup=language_keyboard(),
+            parse_mode="HTML"
+        )
 
 
 @router.callback_query(F.data.startswith("lang_"))
